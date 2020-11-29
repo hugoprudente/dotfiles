@@ -12,9 +12,9 @@ call plug#begin('~/.config/nvim/autoload/plugged')
     Plug 'junegunn/fzf', { 'do': { -> fzf#install() } }
     Plug 'junegunn/fzf.vim'
 
-    " vim tmux navigator
+    " vim tmux and navigations
     Plug 'christoomey/vim-tmux-navigator'
-
+    
     " Add some color
     Plug 'norcalli/nvim-colorizer.lua'
     Plug 'junegunn/rainbow_parentheses.vim'
@@ -32,6 +32,11 @@ call plug#begin('~/.config/nvim/autoload/plugged')
     " startify
     Plug 'mhinz/vim-startify'
 
+    " code 
+    Plug 'pearofducks/ansible-vim'
+    Plug 'hashivim/vim-vagrant'
+    Plug 'lepture/vim-jinja'
+    
     " coc
     Plug 'neoclide/coc.nvim', {'branch': 'release'}
 
