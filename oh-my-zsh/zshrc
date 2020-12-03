@@ -105,13 +105,13 @@ alias zshconfig="nvim ~/.zshrc"
 alias ohmyzsh="nvim ~/.oh-my-zsh"
 alias ops="cd ~/workspace"
 
-if [ -d "~/Environments/osx" ];then
-  source ~/Environments/bin/active
+if [ -d "$HOME/Environments/osx" ];then
+  source ~/Environments/osx/bin/activate
 fi
 
 if [ -f "/usr/local/bin/nvim" ];then
   alias vim="nvim"
 fi
 
-export PATH="~/bin:$PATH"
+export PATH="$HOME/bin:$PATH"
 
