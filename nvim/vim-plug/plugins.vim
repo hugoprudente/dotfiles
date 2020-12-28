@@ -36,7 +36,8 @@ call plug#begin('~/.config/nvim/autoload/plugged')
     Plug 'pearofducks/ansible-vim'
     Plug 'hashivim/vim-vagrant'
     Plug 'lepture/vim-jinja'
-    
+    Plug 'cespare/vim-toml'
+
     " coc
     Plug 'neoclide/coc.nvim', {'branch': 'release'}
 

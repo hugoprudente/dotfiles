@@ -104,14 +104,14 @@ fi
 alias zshconfig="nvim ~/.zshrc"
 alias ohmyzsh="nvim ~/.oh-my-zsh"
 alias ops="cd ~/workspace"
-
+alias cat="bat"
 if [ -d "$HOME/Environments/osx" ];then
   source ~/Environments/osx/bin/activate
 fi
 
 if [ -f "/usr/local/bin/nvim" ];then
   alias vim="nvim"
+  alias vi="nvim"
 fi
 
 export PATH="$HOME/bin:$PATH"
-
