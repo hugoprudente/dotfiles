@@ -1,7 +1,15 @@
 {
-  "coc.preferences.formatOnSaveFiletypes": ["css", "markdown", "graphql", "html", "yaml",  "json", "py", "yml"],
-
+  "coc.preferences.formatOnSaveFiletypes": [
+    "css",
+    "markdown",
+    "graphql",
+    "html",
+    "yaml",
+    "json",
+    "py",
+    "yml"
+  ],
+  "jedi.executable.command": "jedi-language-server",
   "python.linting.enabled": true,
   "python.linting.pylintEnabled": true
-
 }
