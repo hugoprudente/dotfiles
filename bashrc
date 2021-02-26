@@ -41,4 +41,8 @@ if [ -f "/usr/local/bin/nvim" ];then
   alias vi="nvim"
 fi
 
+if command -v tmux &> /dev/null && [ -n "$PS1" ] && [[ ! "$TERM" =~ screen ]] && [[ ! "$TERM" =~ tmux ]]; then
+  [ -z "$TMUX"  ] && { tmux attach || tmux new;}
+fi
+
 export PATH="$HOME/bin:$PATH"

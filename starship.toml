@@ -10,7 +10,7 @@ success_symbol = "[➜](bold green)"     # The "success_symbol" segment is being
 disabled = true
 
 [kubernetes]
-format = 'on [⛵ $context \($namespace\)](dimmed green) '
+format = 'on [⛵ $context \($namespace\)](green) '
 disabled = false
 [kubernetes.context_aliases]
 "default" = "k3s"
