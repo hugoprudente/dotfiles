@@ -15,7 +15,7 @@ export HISTSIZE=${HISTSIZE:-50000}
 export PROMPT_COMMAND='if [ "$(id -u)" -ne 0 ]; then echo "$(date "+%Y-%m-%d.%H:%M:%S") $(pwd) $(history 1)" >> ~/.logs/bash-history-$(date "+%Y-%m-%d").log; fi'
 
 # start starship
-if starship -v &> /dev/null;then
+if starship --version &> /dev/null;then
   eval "$(starship init bash)"
 fi
 
