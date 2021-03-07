@@ -1,7 +1,3 @@
-# Preferred editor for local and remote sessions
-
-# BASH HISTORY
-
 # append to bash_history if Terminal.app quits
 shopt -s histappend
 
@@ -35,6 +31,14 @@ if [ -d "$HOME/Environments/osx" ];then
   source ~/Environments/osx/bin/activate
 fi
 
+if [ -d "$HOME/Environments/venv" ];then
+  source ~/Environments/venv/bin/activate
+fi
+
+if [ -d "$HOME/Environments/wsl" ];then
+  source ~/Environments/wsl/bin/activate
+fi
+
 # alias nvim as vim if using it
 if [ -f "/usr/local/bin/nvim" ];then
   alias vim="nvim"
@@ -44,5 +48,7 @@ fi
 if command -v tmux &> /dev/null && [ -n "$PS1" ] && [[ ! "$TERM" =~ screen ]] && [[ ! "$TERM" =~ tmux ]]; then
   [ -z "$TMUX"  ] && { tmux attach || tmux new;}
 fi
+
+export BASH_SILENCE_DEPRECATION_WARNING=1
 
 export PATH="$HOME/bin:$PATH"
