@@ -15,6 +15,10 @@ if starship --version &> /dev/null;then
   eval "$(starship init bash)"
 fi
 
+if direnv --version &> /dev/null;then
+  eval "$(direnv hook bash)"
+fi
+
 if [[ -n $SSH_CONNECTION ]]; then
   export EDITOR='vim'
 else
@@ -48,6 +52,10 @@ fi
 if command -v tmux &> /dev/null && [ -n "$PS1" ] && [[ ! "$TERM" =~ screen ]] && [[ ! "$TERM" =~ tmux ]]; then
   [ -z "$TMUX"  ] && { tmux attach || tmux new;}
 fi
+
+# Use a decent blue on the directories for LS
+export CLICOLOR=1
+export LSCOLORS=GxFxCxDxBxegedabagaced
 
 export BASH_SILENCE_DEPRECATION_WARNING=1
 
