@@ -1,5 +1,6 @@
 
 *.DS_Store
 *.LSOverride
+nvim/autoload
 Thumbs.db
 .bundle

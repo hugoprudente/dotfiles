@@ -44,7 +44,7 @@ if [ -d "$HOME/Environments/wsl" ];then
 fi
 
 # alias nvim as vim if using it
-if [ -f "/usr/local/bin/nvim" ];then
+if [ -f "/usr/local/bin/nvim" ] | [ -f "/usr/bin/nvim" ];then
   alias vim="nvim"
   alias vi="nvim"
 fi
@@ -60,3 +60,7 @@ export LSCOLORS=GxFxCxDxBxegedabagaced
 export BASH_SILENCE_DEPRECATION_WARNING=1
 
 export PATH="$HOME/bin:$PATH"
+
+source <(flux completion bash)
+source <(kubectl completion bash)
+

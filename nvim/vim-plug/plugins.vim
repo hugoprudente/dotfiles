@@ -37,6 +37,7 @@ call plug#begin('~/.config/nvim/autoload/plugged')
     Plug 'hashivim/vim-vagrant'
     Plug 'lepture/vim-jinja'
     Plug 'cespare/vim-toml'
+    Plug 'hashivim/vim-terraform'
 
     " coc
     Plug 'neoclide/coc.nvim', {'branch': 'release'}
