@@ -7,6 +7,9 @@ export HISTCONTROL=${HISTCONTROL:-ignorespace:erasedups}
 # resize history to 100x the default (500)
 export HISTSIZE=${HISTSIZE:-50000}
 
+# ignore comandos especificos no bash-history
+export HISTIGNORE='ls:ls -lah:pwd:htop:top:clear:reset'
+
 # create a extra daily bash-history in case of bash_history fails. 
 export PROMPT_COMMAND='if [ "$(id -u)" -ne 0 ]; then echo "$(date "+%Y-%m-%d.%H:%M:%S") $(pwd) $(history 1)" >> ~/.logs/bash-history-$(date "+%Y-%m-%d").log; fi'
 
@@ -64,3 +67,8 @@ export PATH="$HOME/bin:$PATH"
 source <(flux completion bash)
 source <(kubectl completion bash)
 
+# Instalacao das Funcoes ZZ (www.funcoeszz.net)
+export ZZOFF=""  # desligue funcoes indesejadas
+export ZZPATH="$HOME/bin/funcoeszz"  # script
+export ZZDIR=""    # pasta zz/
+source "$ZZPATH"
