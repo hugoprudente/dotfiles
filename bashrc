@@ -13,6 +13,14 @@ export HISTIGNORE='ls:ls -lah:pwd:htop:top:clear:reset'
 # create a extra daily bash-history in case of bash_history fails. 
 export PROMPT_COMMAND='if [ "$(id -u)" -ne 0 ]; then echo "$(date "+%Y-%m-%d.%H:%M:%S") $(pwd) $(history 1)" >> ~/.logs/bash-history-$(date "+%Y-%m-%d").log; fi'
 
+# Use a decent blue on the directories for LS
+export CLICOLOR=1
+export LSCOLORS=GxFxCxDxBxegedabagaced
+export BASH_SILENCE_DEPRECATION_WARNING=1
+
+# Load the path first before find commands to source
+export PATH="$HOME/bin:/opt/homebrew/bin:$PATH"
+
 # start starship
 if starship --version &> /dev/null;then
   eval "$(starship init bash)"
@@ -47,7 +55,7 @@ if [ -d "$HOME/Environments/wsl" ];then
 fi
 
 # alias nvim as vim if using it
-if [ -f "/usr/local/bin/nvim" ] | [ -f "/usr/bin/nvim" ];then
+if [ -f "/usr/local/bin/nvim" ] | [ -f "/usr/bin/nvim" ] | [ -f "/opt/homebrew/bin/nvim" ];then
   alias vim="nvim"
   alias vi="nvim"
 fi
@@ -56,19 +64,23 @@ if command -v tmux &> /dev/null && [ -n "$PS1" ] && [[ ! "$TERM" =~ screen ]] &&
   [ -z "$TMUX"  ] && { tmux attach || tmux new;}
 fi
 
-# Use a decent blue on the directories for LS
-export CLICOLOR=1
-export LSCOLORS=GxFxCxDxBxegedabagaced
+# Kubernetes things
+if [ $(command -v flux) ];then
+  source <(flux completion bash)
+fi
+if [ $(command -v kubectl) ];then
+  source <(kubectl completion bash)
+fi
 
-export BASH_SILENCE_DEPRECATION_WARNING=1
+if [ $(command -v codium) ];then
+  alias code="codium"
+fi
 
-export PATH="$HOME/bin:$PATH"
-
-source <(flux completion bash)
-source <(kubectl completion bash)
-
-# Instalacao das Funcoes ZZ (www.funcoeszz.net)
-export ZZOFF=""  # desligue funcoes indesejadas
-export ZZPATH="$HOME/bin/funcoeszz"  # script
-export ZZDIR=""    # pasta zz/
-source "$ZZPATH"
+# Linux things
+if [ $(command -v funcoeszz ) ];then
+  # # Instalacao das Funcoes ZZ (www.funcoeszz.net)
+  export ZZOFF=""  # desligue funcoes indesejadas
+  export ZZPATH="$HOME/bin/funcoeszz"  # script
+  export ZZDIR=""    # pasta zz/
+  source "$ZZPATH"
+fi
