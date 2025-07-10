@@ -1,6 +1,6 @@
 # append to bash_history if Terminal.app quits
 shopt -s histappend
-
+ulimit -n 65536 200000
 # erase duplicates; alternative option: export HISTCONTROL=ignoredups
 export HISTCONTROL=${HISTCONTROL:-ignorespace:erasedups}
 
@@ -8,10 +8,21 @@ export HISTCONTROL=${HISTCONTROL:-ignorespace:erasedups}
 export HISTSIZE=${HISTSIZE:-50000}
 
 # ignore comandos especificos no bash-history
-export HISTIGNORE='ls:ls -lah:pwd:htop:top:clear:reset'
+export HISTIGNORE='ls:ls -lah:pwd:htop:top:clear:reset:exit:wpc5:sulu:git log:git status:cd ..'
 
 # create a extra daily bash-history in case of bash_history fails. 
-export PROMPT_COMMAND='if [ "$(id -u)" -ne 0 ]; then echo "$(date "+%Y-%m-%d.%H:%M:%S") $(pwd) $(history 1)" >> ~/.logs/bash-history-$(date "+%Y-%m-%d").log; fi'
+#export PROMPT_COMMAND='if [ "$(id -u)" -ne 0 ]; then echo "$(date "+%Y-%m-%d.%H:%M:%S") $(pwd) $(history 1)" >> ~/.logs/bash-history-$(date "+%Y-%m-%d").log; fi'
+export PROMPT_COMMAND='
+  LAST_CMD_FILE="$HOME/.logs/.last_command"
+  CURRENT_CMD="$(history 1 | awk "{print \$2}")"
+  if [ "$(id -u)" -ne 0 ]; then
+    if [ ! -f "$LAST_CMD_FILE" ] || [ "$CURRENT_CMD" != "$(cat "$LAST_CMD_FILE")" ]; then
+      echo "$(date "+%Y-%m-%d.%H:%M:%S") $(pwd) $(history 1)" >> "$HOME/.logs/bash-history-$(date "+%Y-%m-%d").log"
+      echo "$CURRENT_CMD" > "$LAST_CMD_FILE"
+    fi
+  fi
+'
+cd $HOME
 
 # Use a decent blue on the directories for LS
 export CLICOLOR=1
@@ -70,8 +81,10 @@ if [ $(command -v flux) ];then
 fi
 if [ $(command -v kubectl) ];then
   source <(kubectl completion bash)
+  complete -o default -F __start_kubectl k
 fi
 
+# Codeium things
 if [ $(command -v codium) ];then
   alias code="codium"
 fi
@@ -83,4 +96,9 @@ if [ $(command -v funcoeszz ) ];then
   export ZZPATH="$HOME/bin/funcoeszz"  # script
   export ZZDIR=""    # pasta zz/
   source "$ZZPATH"
+fi
+
+# Cargo things
+if [ $(command -v carg) ];then
+  source "$HOME/.cargo/env"
 fi
