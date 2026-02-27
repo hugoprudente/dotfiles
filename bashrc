@@ -119,4 +119,13 @@ if [ $(command -v argocd) ]; then
   export ARGOCD_OPTS="--port-forward --grpc-web --port-forward-namespace=sulu-argocd"
 fi
 
+if [ -f ~/.work.bashrc ]; then
+  . ~/.work.bashrc
+fi
+
+if [ -f ~/.work.aliases ]; then
+  . ~/.work.aliases
+fi
+
 cd $HOME
+export PATH="$HOME/.local/bin:$PATH"

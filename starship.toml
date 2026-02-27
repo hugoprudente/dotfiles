@@ -16,6 +16,12 @@ contexts = [
   { context_pattern = "dev.local.cluster.k8s", style = "green", symbol = "💔 " },
 ]
 
+[username]
+show_always = true
+format = '[$user]($style) '
+style_user = 'bold yellow'
+style_root = 'bold red'
+
 [hostname]
 format = '$hostname '
 ssh_only = false
