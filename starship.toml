@@ -10,8 +10,13 @@ success_symbol = "[➜](bold green)"     # The "success_symbol" segment is being
 disabled = true
 
 [kubernetes]
-format = 'on [⛵ $cluster \($namespace\)](bold green) '
+format = 'on [⛵ ($user on )($cluster in )$context \($namespace\)](bold green) '
 disabled = false
 contexts = [
   { context_pattern = "dev.local.cluster.k8s", style = "green", symbol = "💔 " },
 ]
+
+[hostname]
+format = '$hostname '
+ssh_only = false
+trim_at = ''

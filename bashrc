@@ -22,7 +22,6 @@ export PROMPT_COMMAND='
     fi
   fi
 '
-cd $HOME
 
 # Use a decent blue on the directories for LS
 export CLICOLOR=1
@@ -75,16 +74,23 @@ if command -v tmux &> /dev/null && [ -n "$PS1" ] && [[ ! "$TERM" =~ screen ]] &&
   [ -z "$TMUX"  ] && { tmux attach || tmux new;}
 fi
 
+# Load bash-completion
+if [ -f /usr/share/bash-completion/bash_completion ]; then
+  . /usr/share/bash-completion/bash_completion
+elif [ -f /etc/bash_completion ]; then
+  . /etc/bash_completion
+elif [ -f "$(brew --prefix 2>/dev/null)/etc/profile.d/bash_completion.sh" ]; then
+  . "$(brew --prefix)/etc/profile.d/bash_completion.sh"
+fi
+
 # Kubernetes things
 if [ $(command -v flux) ];then
   source <(flux completion bash)
 fi
 if [ $(command -v kubectl) ];then
   source <(kubectl completion bash)
-  complete -o default -F __start_kubectl k
 fi
 
-# Codeium things
 if [ $(command -v codium) ];then
   alias code="codium"
 fi
@@ -97,8 +103,20 @@ if [ $(command -v funcoeszz ) ];then
   export ZZDIR=""    # pasta zz/
   source "$ZZPATH"
 fi
-
-# Cargo things
-if [ $(command -v carg) ];then
-  source "$HOME/.cargo/env"
+if [ -f "$HOME/.cargo/env" ]; then
+  . "$HOME/.cargo/env"
 fi
+
+if [ -d "${KREW_ROOT:-$HOME/.krew}" ]; then
+  export PATH="${KREW_ROOT:-$HOME/.krew}/bin:$PATH"
+fi
+
+export NVM_DIR="$HOME/.nvm"
+  [ -s "/opt/homebrew/opt/nvm/nvm.sh" ] && \. "/opt/homebrew/opt/nvm/nvm.sh"  # This loads nvm
+  [ -s "/opt/homebrew/opt/nvm/etc/bash_completion.d/nvm" ] && \. "/opt/homebrew/opt/nvm/etc/bash_completion.d/nvm"  # This loads nvm bash_completion
+
+if [ $(command -v argocd) ]; then
+  export ARGOCD_OPTS="--port-forward --grpc-web --port-forward-namespace=sulu-argocd"
+fi
+
+cd $HOME
